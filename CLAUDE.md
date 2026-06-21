@@ -69,7 +69,6 @@ Cada apresentação é uma página HTML estática servida diretamente, sem build
   - `nextlevel-icon.png` — só o símbolo M, sem fundo (favicon / usos reduzidos).
 - **Variantes oficiais (`brand/`)** — fontes para outros contextos, não usar direto nos decks:
   - `brand/logo-full-eclipse.png` · `brand/logo-icon-eclipse.png` — versões com fundo Eclipse embutido.
-  - `brand/logo-slogan-landscape.png` · `brand/logo-slogan-quadrado.png` — lockup com tagline "Capacitação e soluções com IA".
   - `brand/Next-Level-Brandkit.pdf` — brand book completo (v1.0), fonte de verdade da marca.
 - Tamanhos mínimos em tela: logo completo **90px** de largura; símbolo **24px** de altura. Respiro mínimo: **2X** ao redor.
 - **Nunca:** distorcer, recolorir, rotacionar, aplicar sombra/brilho/3D, reduzir opacidade, ou usar sobre fundo "sujo".
