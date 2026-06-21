@@ -1,16 +1,16 @@
 # DeckNextLevel
 
-Apresentações/decks da **Next Level Tech** publicados como **GitHub Pages** no domínio próprio **nextleveltechbr.com**.
+Apresentações/decks da **Next Level Tech** publicados como **GitHub Pages** no domínio próprio **decks.nextleveltechbr.com**.
 Cada apresentação é uma página HTML estática servida direto, sem build.
 
-- **Domínio:** https://nextleveltechbr.com/ (cada deck em `/<slug>/`)
+- **Domínio:** https://decks.nextleveltechbr.com/ (cada deck em `/<slug>/`)
 - **Sem portal na raiz** — cada deck é compartilhado pela URL direta.
 
 ## Apresentações
 
 | Apresentação | URL |
 |---|---|
-| Plataforma de Atendimento WhatsApp · Arquitetura | https://nextleveltechbr.com/plataforma-whatsapp-evolution-api/ |
+| Plataforma de Atendimento WhatsApp · Arquitetura | https://decks.nextleveltechbr.com/plataforma-whatsapp-evolution-api/ |
 
 ## Como funciona
 
