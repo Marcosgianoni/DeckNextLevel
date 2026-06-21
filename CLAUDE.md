@@ -13,18 +13,27 @@ Cada apresentação é uma página HTML estática servida diretamente, sem build
 
 ## ⚡ Quando o usuário pedir uma apresentação nova — execute este fluxo
 1. **Coletar:** nome do cliente, tema e dados (números, processos, datas, ROI, payback).
-2. **Definir o slug** em kebab-case (ex.: `Cliente Exemplo Onboarding` → `cliente-exemplo-onboarding`).
-3. **Ler o template:** `mcp__github__get_file_contents` no path `_template/index.html`.
+2. **Definir de onde vem o HTML** (não há template fixo no repo):
+   - **Modo A — o usuário traz o HTML pronto:** use o arquivo/conteúdo que ele passar; ajuste só os caminhos relativos (`../nextlevel-logo.png`) se necessário.
+   - **Modo B — criar do zero aqui:** monte o HTML aplicando o **padrão visual da Next Level** (ver seção "Padrão visual Next Level").
+3. **Definir o slug** em kebab-case (ex.: `Cliente Exemplo Onboarding` → `cliente-exemplo-onboarding`).
 4. **Criar a página** na branch `main`:
    - `mcp__github__create_or_update_file`
    - `path`: `<slug-cliente>/index.html`
    - `branch`: `main`
-   - `content`: o HTML já com cliente/números/textos substituídos
+   - `content`: o HTML final (do Modo A ou B), com cliente/números/textos preenchidos
    - `message`: commit claro (ex.: `Add <Cliente> presentation`)
    - **Criar** não precisa de `sha`. **Atualizar** precisa: faça `get_file_contents` antes para pegar o `sha` atual.
 5. **Atualizar o portal:** `index.html` da raiz e o `README.md` para listar a nova apresentação (mesmo fluxo: `get_file_contents` → `sha` → `create_or_update_file`).
 6. **Aguardar rebuild:** o Pages reconstrói sozinho em ~30–60s após o commit em `main`.
 7. **Verificar:** `WebFetch` (ou Playwright) na URL pública para confirmar que está no ar.
+
+## Padrão visual Next Level
+> Use no **Modo B** (criar HTML do zero). _A preencher com o brand kit oficial._
+
+- **Cores:** _(aguardando brand kit — primária, secundária, neutros e cor de destaque)_
+- **Tipografia:** _(aguardando brand kit — fontes de título e corpo)_
+- **Logo:** referenciar como `../nextlevel-logo.png`
 
 ## Modelo mental (como o deploy funciona)
 - **Sem build/CI.** Não existe `.github/workflows`. O GitHub serve os HTML **exatamente como estão**.
@@ -33,9 +42,8 @@ Cada apresentação é uma página HTML estática servida diretamente, sem build
 
 ```
 DeckNextLevel/
-├── index.html            → https://marcosgianoni.github.io/DeckNextLevel/
+├── index.html            → https://marcosgianoni.github.io/DeckNextLevel/ (portal)
 ├── nextlevel-logo.png    → asset compartilhado (referenciado como ../nextlevel-logo.png)
-├── _template/index.html  → template base (NÃO é publicado como página útil)
 └── <slug-cliente>/
     └── index.html        → https://marcosgianoni.github.io/DeckNextLevel/<slug-cliente>/
 ```
@@ -69,7 +77,7 @@ Peça ao usuário para:
 ## Detalhes que evitam dor de cabeça
 - **Caminhos relativos sempre** (`../nextlevel-logo.png`). Evite caminhos absolutos (`/logo.png`), porque apontam para `marcosgianoni.github.io/logo.png`, fora do repo.
 - **Página em branco / 404:** quase sempre é (a) faltou `index.html` na pasta certa, ou (b) caminho absoluto de asset quebrado. Use caminhos relativos.
-- **Jekyll:** o Pages processa o site com Jekyll por padrão e **ignora pastas que começam com `_`** (por isso `_template/` não vira página). Se precisar servir uma pasta com `_`, crie um arquivo vazio `.nojekyll` na raiz para desligar o Jekyll.
+- **Jekyll:** o Pages processa o site com Jekyll por padrão e **ignora pastas que começam com `_`**. Se precisar servir uma pasta com `_`, crie um arquivo vazio `.nojekyll` na raiz para desligar o Jekyll.
 - **Source do Pages:** mantenha **"Deploy from a branch"** (não "GitHub Actions"). O modo Actions só é necessário para builds (React, Vite, etc.).
 
 ---
