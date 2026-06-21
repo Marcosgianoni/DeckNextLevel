@@ -7,7 +7,8 @@ Coleção de **apresentações/decks da Next Level** publicadas como **GitHub Pa
 Cada apresentação é uma página HTML estática servida diretamente, sem build.
 
 - **Repo:** `Marcosgianoni/DeckNextLevel`
-- **URL pública (Pages):** `https://marcosgianoni.github.io/DeckNextLevel/`
+- **URL pública:** `https://nextleveltechbr.com/` (domínio próprio; cada deck em `/<slug>/`)
+- **Sem portal na raiz** — cada deck é compartilhado pela URL direta. O site institucional vive em outro domínio (`nextltech.com.br`).
 - **Branch publicada:** `main`, pasta `/` (root)
 - **Logo compartilhada:** `nextlevel-logo.png` (referenciar como `../nextlevel-logo.png`)
 
@@ -24,7 +25,7 @@ Cada apresentação é uma página HTML estática servida diretamente, sem build
    - `content`: o HTML final (do Modo A ou B), com cliente/números/textos preenchidos
    - `message`: commit claro (ex.: `Add <Cliente> presentation`)
    - **Criar** não precisa de `sha`. **Atualizar** precisa: faça `get_file_contents` antes para pegar o `sha` atual.
-5. **Atualizar o portal:** `index.html` da raiz e o `README.md` para listar a nova apresentação (mesmo fluxo: `get_file_contents` → `sha` → `create_or_update_file`).
+5. **Atualizar o `README.md`** para listar a nova apresentação (não há portal na raiz — o deck é compartilhado pela URL direta).
 6. **Aguardar rebuild:** o Pages reconstrói sozinho em ~30–60s após o commit em `main`.
 7. **Verificar:** `WebFetch` (ou Playwright) na URL pública para confirmar que está no ar.
 
@@ -79,18 +80,19 @@ Direta, técnica, honesta, próxima ("você"). Frases curtas, verbos no presente
 ## Modelo mental (como o deploy funciona)
 - **Sem build/CI.** Não existe `.github/workflows`. O GitHub serve os HTML **exatamente como estão**.
 - **Cada apresentação = uma subpasta** com um `index.html`. A URL espelha o caminho da pasta.
-- O `index.html` da raiz é o **portal** que lista as apresentações.
+- **Sem portal na raiz.** Não há `index.html` na raiz — cada deck é compartilhado pela URL direta.
+- **Domínio próprio** `nextleveltechbr.com` definido pelo arquivo `CNAME` na raiz (apex serve direto na raiz do domínio).
 
 ```
 DeckNextLevel/
-├── index.html            → https://marcosgianoni.github.io/DeckNextLevel/ (portal)
+├── CNAME                 → domínio próprio: nextleveltechbr.com
 ├── nextlevel-logo.png    → asset compartilhado (referenciado como ../nextlevel-logo.png)
 └── <slug-cliente>/
-    └── index.html        → https://marcosgianoni.github.io/DeckNextLevel/<slug-cliente>/
+    └── index.html        → https://nextleveltechbr.com/<slug-cliente>/
 ```
 
 **Regra de ouro da URL:** o caminho da pasta é a URL.
-`cliente-exemplo-onboarding/index.html` → `https://marcosgianoni.github.io/DeckNextLevel/cliente-exemplo-onboarding/`
+`cliente-exemplo-onboarding/index.html` → `https://nextleveltechbr.com/cliente-exemplo-onboarding/`
 
 ## Git neste ambiente
 - Neste ambiente o `git push` normalmente **funciona** — pode usar git puro.
@@ -116,7 +118,7 @@ Peça ao usuário para:
 3. **Permissions → Contents:** `Read and write`.
 
 ## Detalhes que evitam dor de cabeça
-- **Caminhos relativos sempre** (`../nextlevel-logo.png`). Evite caminhos absolutos (`/logo.png`), porque apontam para `marcosgianoni.github.io/logo.png`, fora do repo.
+- **Caminhos relativos sempre** (`../nextlevel-logo.png`). Evite caminhos absolutos (`/logo.png`), porque apontam para `nextleveltechbr.com/logo.png`, fora da pasta do deck.
 - **Página em branco / 404:** quase sempre é (a) faltou `index.html` na pasta certa, ou (b) caminho absoluto de asset quebrado. Use caminhos relativos.
 - **Jekyll:** o Pages processa o site com Jekyll por padrão e **ignora pastas que começam com `_`**. Se precisar servir uma pasta com `_`, crie um arquivo vazio `.nojekyll` na raiz para desligar o Jekyll.
 - **Source do Pages:** mantenha **"Deploy from a branch"** (não "GitHub Actions"). O modo Actions só é necessário para builds (React, Vite, etc.).
