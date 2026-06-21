@@ -29,11 +29,48 @@ Cada apresentação é uma página HTML estática servida diretamente, sem build
 7. **Verificar:** `WebFetch` (ou Playwright) na URL pública para confirmar que está no ar.
 
 ## Padrão visual Next Level
-> Use no **Modo B** (criar HTML do zero). _A preencher com o brand kit oficial._
+> Brand Book v1.0 (2026). Use no **Modo B** (criar HTML do zero). Marca: **Next Level Tech** · slogan **"Tecnologia. No próximo nível."**
 
-- **Cores:** _(aguardando brand kit — primária, secundária, neutros e cor de destaque)_
-- **Tipografia:** _(aguardando brand kit — fontes de título e corpo)_
-- **Logo:** referenciar como `../nextlevel-logo.png`
+### Paleta de cores (use só estas)
+| Cor | Hex | Papel |
+|---|---|---|
+| **Eclipse** | `#080F17` | Fundo institucional padrão (o "palco") |
+| **Voltage Blue** | `#3DA3EC` | Marca / destaque / CTA — cor de ação **única** |
+| **Stardust** | `#A3B0C5` | Texto secundário, linhas, detalhes |
+| **Pure White** | `#FFFFFF` | Texto principal sobre Eclipse |
+
+- Voltage Blue é o **único** destaque — nunca recolorir a marca com outras cores.
+- Tons derivados só em hover, gradientes, glow e estados de UI.
+
+### Tipografia
+- **Títulos e corpo:** `SansBeamBody` → fallback `"Helvetica Neue", Arial, sans-serif`.
+- **Técnico/tags/números:** `JetBrains Mono` (Google Fonts) → fallback `Consolas, "Courier New", monospace`.
+- Hierarquia:
+  - **Display:** SansBeamBody Heavy · 36–96px · letter-spacing −2%
+  - **Headline:** Bold · 22–28px · −1.5%
+  - **Subhead:** Medium · 14–18px
+  - **Corpo:** Regular · 16–18px (web) · line-height 1.5–1.6
+  - **Tag técnica:** JetBrains Mono Medium · MAIÚSCULAS · letter-spacing 0.18em (ex.: `// SEÇÃO 03`)
+
+### Apresentações / decks (formato padrão)
+- **16:9**, fundo **Eclipse**, destaque **Voltage**, SansBeamBody em todo o conteúdo.
+- **1 ideia por slide.** Hierarquia: tag mono → headline → bullets curtos ou 1 visual. Densidade é inimiga da marca.
+- **CTA:** botão **pill** (`border-radius: 100px`) em Voltage Blue com texto Eclipse. Cards: cantos 6–8px.
+- **Glow:** radial gradient em Voltage com 12–18% de opacidade, sempre ao fundo (nunca em primeiro plano).
+- **Grafismos** (sutis, nunca decorativos): malha de pontos/linhas ao fundo; filetes finos com gradiente p/ Voltage marcando seções; tags mono com prefixo `//`.
+
+### Ícones
+- Bibliotecas oficiais: **Lucide** ou **Phosphor (Light)**. Traço 1.5–2px, geometria limpa.
+- Só contorno, em **Voltage Blue** ou **Pure White**. Nunca preenchidos, coloridos ou cartoon.
+
+### Logo
+- Assets já no repo (raiz): `nextlevel-logo.png` (logo completo, sem fundo) e `nextlevel-icon.png` (só o símbolo M, p/ favicon/usos reduzidos).
+- Referenciar como `../nextlevel-logo.png` a partir das subpastas — ambos sem fundo, ideais sobre Eclipse.
+- Tamanhos mínimos em tela: logo completo **90px** de largura; símbolo **24px** de altura. Respiro mínimo: **2X** ao redor.
+- **Nunca:** distorcer, recolorir, rotacionar, aplicar sombra/brilho/3D, reduzir opacidade, ou usar sobre fundo "sujo".
+
+### Voz e tom (textos)
+Direta, técnica, honesta, próxima ("você"). Frases curtas, verbos no presente. Sem clichês de marketing ("disruptivo", "jornada", "360°"). Prefira números e fatos (ex.: "Lead time caiu de 12 para 2 dias").
 
 ## Modelo mental (como o deploy funciona)
 - **Sem build/CI.** Não existe `.github/workflows`. O GitHub serve os HTML **exatamente como estão**.
