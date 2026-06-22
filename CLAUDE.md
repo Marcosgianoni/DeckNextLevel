@@ -20,12 +20,12 @@ Cada apresentação é uma página HTML estática servida diretamente, sem build
    - **Modo A — o usuário traz o HTML pronto:** use o conteúdo que ele passar; ajuste só os caminhos relativos (`../nextlevel-logo.png`).
    - **Modo B — criar do zero:** monte o HTML aplicando o **padrão visual da Next Level** (ver seção "Padrão visual Next Level").
 3. **Definir o slug** em kebab-case (ex.: `Cliente Exemplo Onboarding` → `cliente-exemplo-onboarding`). **O slug é a URL** — escolha com cuidado.
-4. **Criar o arquivo** `<slug>/index.html` na raiz do repo. Regra única: **uma subpasta por deck, com um `index.html` dentro.**
+4. **Criar o arquivo** `<slug>/index.html`. Regra única: **uma subpasta por deck, com um `index.html` dentro** — **nunca** um `index.html` na raiz. Slugs diferentes = pastas/URLs diferentes, então **decks nunca se sobrescrevem**: publicar um novo não toca nos existentes. (Sobrescreve só se você reusar um slug que já existe.)
 5. **Publicar na `main`** (é a branch que o Pages serve). Use a Forma 1; só caia na 2 se falhar:
-   - **Forma 1 (padrão) — `git push`:** funciona neste ambiente.
+   - **Forma 1 (padrão) — `git push`:** funciona neste ambiente. Um `git add` pode incluir **uma ou várias** pastas — tudo vai num commit e publica junto. O push só altera os arquivos do commit; **não apaga** os decks que já existem.
      ```bash
-     git add <slug>/index.html README.md
-     git commit -m "Add <Cliente> presentation"
+     git add cliente-a/index.html cliente-b/index.html README.md   # uma ou várias pastas
+     git commit -m "Add apresentacoes cliente-a e cliente-b"
      git push -u origin main
      ```
    - **Forma 2 (fallback, só se o push retornar HTTP 403) — GitHub MCP**, um arquivo por chamada:
