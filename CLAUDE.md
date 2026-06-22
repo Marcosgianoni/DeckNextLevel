@@ -13,21 +13,34 @@ Cada apresentação é uma página HTML estática servida diretamente, sem build
 - **Logo compartilhada:** `nextlevel-logo.png` (referenciar como `../nextlevel-logo.png`)
 
 ## ⚡ Quando o usuário pedir uma apresentação nova — execute este fluxo
+> Receita testada e validada. Siga na ordem; não reinvente.
+
 1. **Coletar:** nome do cliente, tema e dados (números, processos, datas, ROI, payback).
 2. **Definir de onde vem o HTML** (não há template fixo no repo):
-   - **Modo A — o usuário traz o HTML pronto:** use o arquivo/conteúdo que ele passar; ajuste só os caminhos relativos (`../nextlevel-logo.png`) se necessário.
-   - **Modo B — criar do zero aqui:** monte o HTML aplicando o **padrão visual da Next Level** (ver seção "Padrão visual Next Level").
-3. **Definir o slug** em kebab-case (ex.: `Cliente Exemplo Onboarding` → `cliente-exemplo-onboarding`).
-4. **Criar a página** na branch `main`:
-   - `mcp__github__create_or_update_file`
-   - `path`: `<slug-cliente>/index.html`
-   - `branch`: `main`
-   - `content`: o HTML final (do Modo A ou B), com cliente/números/textos preenchidos
-   - `message`: commit claro (ex.: `Add <Cliente> presentation`)
-   - **Criar** não precisa de `sha`. **Atualizar** precisa: faça `get_file_contents` antes para pegar o `sha` atual.
-5. **Atualizar o `README.md`** para listar a nova apresentação (não há portal na raiz — o deck é compartilhado pela URL direta).
-6. **Aguardar rebuild:** o Pages reconstrói sozinho em ~30–60s após o commit em `main`.
-7. **Verificar:** `WebFetch` (ou Playwright) na URL pública para confirmar que está no ar.
+   - **Modo A — o usuário traz o HTML pronto:** use o conteúdo que ele passar; ajuste só os caminhos relativos (`../nextlevel-logo.png`).
+   - **Modo B — criar do zero:** monte o HTML aplicando o **padrão visual da Next Level** (ver seção "Padrão visual Next Level").
+3. **Definir o slug** em kebab-case (ex.: `Cliente Exemplo Onboarding` → `cliente-exemplo-onboarding`). **O slug é a URL** — escolha com cuidado.
+4. **Criar o arquivo** `<slug>/index.html` na raiz do repo. Regra única: **uma subpasta por deck, com um `index.html` dentro.**
+5. **Publicar na `main`** (é a branch que o Pages serve). Use a Forma 1; só caia na 2 se falhar:
+   - **Forma 1 (padrão) — `git push`:** funciona neste ambiente.
+     ```bash
+     git add <slug>/index.html README.md
+     git commit -m "Add <Cliente> presentation"
+     git push -u origin main
+     ```
+   - **Forma 2 (fallback, só se o push retornar HTTP 403) — GitHub MCP**, um arquivo por chamada:
+     - `mcp__github__create_or_update_file` · `owner: Marcosgianoni` · `repo: DeckNextLevel` · `branch: main` · `path: <slug>/index.html` · `content:` HTML · `message:` commit.
+     - **Criar:** sem `sha`. **Atualizar arquivo que já existe:** `get_file_contents` antes → pegue o `sha` → passe na chamada (sem `sha` o update falha — erro mais comum).
+     - Vários decks de uma vez: `mcp__github__push_files` (um único commit atômico).
+6. **Atualizar o `README.md`** listando o novo deck (não há portal na raiz — cada deck é compartilhado pela URL direta).
+7. **Aguardar rebuild:** ~30–60s após o commit em `main` (o build "pages build and deployment" fica verde sozinho).
+8. **URL pública:** `https://marcosgianoni.github.io/DeckNextLevel/<slug>/`
+
+### ⚠️ Domínio e verificação — leia, evita 1 hora de confusão
+- **Domínio nativo do GitHub Pages, SEM domínio próprio.** Não existe `CNAME` no repo. **Não crie um `CNAME`** a menos que o usuário já tenha o DNS configurado (registro CNAME do subdomínio → `marcosgianoni.github.io`). Sem DNS, o domínio próprio dá `ERR_NAME_NOT_RESOLVED` **e** deixa um **redirect 301** salvo nas Settings que quebra também o `github.io` (some só removendo o Custom domain em Settings → Pages).
+- **A raiz `/DeckNextLevel/` mostra o `README.md`** (renderizado pelo Jekyll) — isso é esperado, **não é o deck**. O deck é sempre `/<slug>/`.
+- **Não dá para verificar a URL `*.github.io` a partir deste ambiente:** o GitHub responde **403** ao fetcher daqui (vale para qualquer `github.io` — testado com `octocat.github.io`). Logo, `WebFetch`/`curl` daqui **não confirmam** se está no ar. Sinais confiáveis: build do Pages **verde** (`mcp__github__actions_list`) + arquivo presente na `main` (`mcp__github__get_file_contents`).
+- **Se o usuário disser que "não abre":** quase sempre é **cache de redirect 301 no navegador dele** (o Chrome guarda 301 por URL). Peça para testar **no celular em 4G/5G** (zero cache, DNS independente) ou em **aba anônima nova**. No Chrome desktop: DevTools (F12) → Network → marcar **"Disable cache"** → recarregar.
 
 ## Padrão visual Next Level
 > Brand Book v1.0 (2026). Use no **Modo B** (criar HTML do zero). Marca: **Next Level Tech** · slogan **"Tecnologia. No próximo nível."**
