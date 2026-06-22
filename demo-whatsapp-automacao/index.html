@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Automação no WhatsApp · Next Level (Demo)</title>
+<link rel="icon" href="../nextlevel-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --eclipse:#080F17; --voltage:#3DA3EC; --stardust:#A3B0C5; --white:#FFFFFF;
+    --sans:"Helvetica Neue",Arial,sans-serif;
+    --mono:"JetBrains Mono",Consolas,"Courier New",monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%}
+  body{background:var(--eclipse);color:var(--white);font-family:var(--sans);-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden;position:relative}
+  body::before{content:"";position:fixed;inset:0;background-image:radial-gradient(rgba(163,176,197,.12) 1px,transparent 1px);background-size:34px 34px;opacity:.5;pointer-events:none}
+  body::after{content:"";position:fixed;top:-15%;right:-10%;width:70vmax;height:70vmax;background:radial-gradient(circle,rgba(61,163,236,.16) 0%,rgba(61,163,236,0) 60%);pointer-events:none}
+  .wrap{position:relative;z-index:1;flex:1;display:flex;flex-direction:column;padding:clamp(24px,5vw,64px)}
+  header{display:flex;align-items:center;justify-content:space-between;gap:16px}
+  header img{width:120px;height:auto;display:block}
+  .demo-badge{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--eclipse);background:var(--stardust);padding:6px 12px;border-radius:100px;white-space:nowrap}
+  main{flex:1;display:flex;flex-direction:column;justify-content:center;max-width:980px}
+  .filete{height:3px;width:64px;background:linear-gradient(90deg,var(--voltage),transparent);border-radius:2px;margin-bottom:28px}
+  .tag{font-family:var(--mono);font-weight:600;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--voltage);margin-bottom:24px}
+  h1{font-weight:800;font-size:clamp(40px,7vw,88px);line-height:1.02;letter-spacing:-.02em;margin-bottom:24px}
+  h1 em{color:var(--voltage);font-style:normal}
+  .sub{font-size:clamp(16px,2vw,20px);line-height:1.6;color:var(--stardust);max-width:620px;margin-bottom:40px}
+  .stat{display:flex;gap:40px;flex-wrap:wrap;margin-bottom:44px}
+  .stat b{display:block;font-size:clamp(32px,4vw,52px);font-weight:800;letter-spacing:-.02em;color:var(--white)}
+  .stat span{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--stardust)}
+  ul{list-style:none;display:flex;flex-direction:column;gap:18px;margin-bottom:44px;max-width:640px}
+  li{display:flex;align-items:flex-start;gap:14px;font-size:clamp(15px,1.6vw,18px);line-height:1.5}
+  li svg{flex:none;width:24px;height:24px;stroke:var(--voltage);stroke-width:1.8;fill:none;margin-top:1px}
+  .cta{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;background:var(--voltage);color:var(--eclipse);font-weight:700;font-size:16px;text-decoration:none;padding:15px 28px;border-radius:100px;transition:transform .15s ease,box-shadow .15s ease}
+  .cta:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(61,163,236,.35)}
+  .cta svg{width:18px;height:18px;stroke:var(--eclipse);stroke-width:2;fill:none}
+  footer{position:relative;z-index:1;padding:clamp(16px,3vw,32px) clamp(24px,5vw,64px);border-top:1px solid rgba(163,176,197,.16);display:flex;justify-content:space-between;align-items:center;gap:16px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--stardust)}
+  @media(max-width:640px){.stat{gap:28px}footer{flex-direction:column;align-items:flex-start;gap:6px}}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <img src="../nextlevel-logo.png" alt="Next Level Tech">
+      <span class="demo-badge">Página de demonstração</span>
+    </header>
+    <main>
+      <div class="filete"></div>
+      <p class="tag">// DEMO 02 — ATENDIMENTO</p>
+      <h1>Atendimento no <em>WhatsApp</em>, no piloto automático</h1>
+      <p class="sub">Respostas instantâneas, filas organizadas e dados que viram decisão. Seu time foca no que importa.</p>
+      <div class="stat">
+        <div><b>-68%</b><span>Tempo de resposta</span></div>
+        <div><b>24/7</b><span>Disponibilidade</span></div>
+        <div><b>+40%</b><span>Conversão</span></div>
+      </div>
+      <ul>
+        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Roteamento inteligente de conversas.</li>
+        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Integração direta com o seu CRM.</li>
+        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Relatórios em tempo real, sem exportar nada.</li>
+      </ul>
+      <a class="cta" href="#">Falar com a Next Level
+        <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </main>
+  </div>
+  <footer>
+    <span>Next Level Tech</span>
+    <span>Tecnologia. No próximo nível.</span>
+  </footer>
+</body>
+</html>
