@@ -11,6 +11,7 @@ Cada apresentação é uma página HTML estática servida direto, sem build.
 | Apresentação | URL |
 |---|---|
 | Plataforma de Atendimento WhatsApp · Arquitetura | https://marcosgianoni.github.io/DeckNextLevel/plataforma-whatsapp-evolution-api/ |
+| SUPER SEG · Super Connect: do protótipo ao produto | https://marcosgianoni.github.io/DeckNextLevel/super-seg-super-connect/ |
 
 ## Como funciona
 
